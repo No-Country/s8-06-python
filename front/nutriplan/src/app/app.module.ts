@@ -10,11 +10,15 @@ import { matRamenDiningOutline }from '@ng-icons/material-icons/outline'
 import { heroHome, heroBars4, heroUser, heroMagnifyingGlass, heroXMark } from '@ng-icons/heroicons/outline';
 import { typContacts } from '@ng-icons/typicons'
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { Error404Component } from './error404/error404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
