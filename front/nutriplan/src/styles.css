@@ -1,7 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,200&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,200&display=swap');
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, sans-serif; font-size: 1.5rem;}
 
+.btn-bd-primary {
+  --bs-btn-color: black;
+  --bs-btn-bg: #9ec15e;
+  --bs-btn-border-color: #9ec15e;
+  --bs-btn-hover-color: black;
+  --bs-btn-hover-bg: #9ec15ecd;
+  --bs-btn-hover-border-color:  #9ec15ecd;
+  --bs-btn-focus-shadow-rgb: #9ec15e;
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #9ec15eb5;
+  --bs-btn-active-border-color: #9ec15eb5;
+}
+  
+.btn-lnk {
+  cursor: pointer;
+  color:  #708943;
+  font-size: 1.25rem;
+}
+
+.btn-lnk:hover {
+  color: #708943d1;
+}
+.btn-lnk:active {
+  color: #708943b3;
+}
