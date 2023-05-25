@@ -5,7 +5,7 @@ from .models import *
 
 # Register your models here.
 class UserAdmin(ModelAdmin):
-    list_display = ('username',)
+    list_display = ('id','username',)
 
 
 admin.site.register(User,UserAdmin)
