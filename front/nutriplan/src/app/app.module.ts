@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,8 @@ import { Error404Component } from './error404/error404.component';
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
     NgIconsModule.withIcons({ heroHome, heroBars4, heroMagnifyingGlass, matRamenDiningOutline, heroXMark, typContacts, heroUser }),
   ],
   providers: [],
