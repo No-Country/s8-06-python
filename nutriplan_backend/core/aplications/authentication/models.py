@@ -47,43 +47,44 @@ class Suscription(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
 
-class Profesional(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+class Professional(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     dni = models.CharField(max_length=10)
-    licencia = models.CharField(max_length=20)
-    fecha_emision_licencia = models.DateField()
-    titulo = models.CharField(max_length=100)
-    e_provincia = models.CharField(max_length=15)
-    e_pais = models.CharField(max_length=15)
-    validacion = models.BooleanField(default=False)
+    medical_license = models.CharField(max_length=20)
+    license_issue_date = models.DateField()
+    title = models.CharField(max_length=100)
+    province = models.CharField(max_length=15)
+    country = models.CharField(max_length=15)
+    validation_status = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.usuario.username
+        return self.user.username
 
-        # crear una receta nutritiva para el paciente
-    def crear_receta(self, paciente, nombre_receta, ingredientes, instrucciones):
-        receta = Receta.objects.create(profesional=self, paciente=paciente, nombre=nombre_receta, ingredientes=ingredientes, instrucciones=instrucciones)
-        return receta
 
-        # retorna la lista de pacientes asignados a este profesional
-    def pacientes_asignados(self):
-        return Paciente.objects.filter(profesional=self)
-
+# Actualiza el usuario a professional creando nuevas validaciones 
+# y solicita nuevos campos de validacion
 @receiver(post_save, sender=User)
-def update_profesional(sender, instance, **kwargs):
-    if instance.type_user == '3' and not hasattr(instance, 'profesional'):
-        fecha_manual = date(2023, 5, 31)
-        Profesional.objects.create(usuario=instance, dni='', licencia='',
-                                     fecha_emision_licencia=fecha_manual, titulo='',
-                                     e_provincia='', e_pais='', validacion=False)
-    elif instance.type_user != '3' and hasattr(instance, 'profesional'):
-        instance.profesional.delete()
-
-class PublicacionReceta(models.Model):
-    titulo = models.CharField(max_length=100)
-    contenido = models.TextField()
-    fecha_publicacion = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.titulo
+def update_professional(sender, instance, **kwargs):
+    if instance.type_user != 'PROFESIONAL':
+        if instance.type_user == 'STANDARD':
+            instance.additional_field = models.CharField(max_length=100, blank=True)
+            instance.save()
+        instance.type_user = 'PROFESIONAL'
+        instance.save()
     
+    if not hasattr(instance, 'professional'):
+        manual_date = date(2023, 5, 31)
+        Professional.objects.create(
+            user=instance,
+            dni='',
+            medical_license='',
+            license_issue_date=manual_date,
+            title='',
+            province='',
+            country='',
+            validation_status=False
+        )
+    elif instance.type_user != 'PROFESIONAL' and hasattr(instance, 'professional'):
+        instance.professional.delete()
+
+
