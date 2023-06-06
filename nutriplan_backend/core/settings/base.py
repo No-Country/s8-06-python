@@ -34,7 +34,7 @@ DEFAULT_APPS = [
 
 LOCAL_APPS = [
     'aplications.authentication',
-    
+    'chat',
 ]
 
 THIRD_APPS = [
