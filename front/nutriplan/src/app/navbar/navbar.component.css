@@ -1,3 +1,22 @@
 .nav-link>span {
     font-weight: 700;
 }
+
+.modal-title {
+    font-weight: 600;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #000;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: red;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: red;
+  }

@@ -15,7 +15,7 @@
 
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header mx-1 pb-0">
-            <button type="button" class="btn btn-outline-link" data-bs-dismiss="offcanvas" aria-label="Close">
+            <button type="button" class="btn btn-outline-link" (click)="limpiarForm" data-bs-dismiss="offcanvas" aria-label="Close">
                 <ng-icon name="heroXMark" size="1.75rem"></ng-icon>
             </button> 
         </div>
@@ -48,40 +48,48 @@
                 <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-lg btn-bd-primary">
                     Iniciar Sesion
                 </button>
-                <a class="btn-lnk">o registrate aqui</a>
+                <a data-bs-toggle="modal" data-bs-target="#loginModal" class="btn-lnk" (click)="formRegister()">o registrate aqui</a>
             </div>
         </div>
       </div>
     </div>
   </nav>
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+
+
+  <div class="modal fade" data-bs-backdrop="static" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="loginModalLabel">Login Form</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
         <div class="modal-body">
+            <div class="d-flex flex-row-reverse">
+              <a type="button"  data-bs-dismiss="modal" aria-label="Close" (click)="limpiarForm()">
+                <ng-icon name="heroXMark" size="1.75rem"></ng-icon>
+              </a>
+            </div>
+          <h4 class="modal-title text-center mb-4 mt-3" id="loginModalLabel">{{ titleModal }}</h4>
           <form [formGroup]="loginForm" (ngSubmit)="loginFormSubmit">
             <div class="mb-3">
-              <label for="id_email" class="form-label">Email address</label>
               <input formControlName="email" [class.is-invalid]="emailField.touched && emailField.invalid" type="email"
-                class="form-control" id="id_email">
-              <div *ngIf="emailField.touched && emailField.hasError('required')" class="d-block invalid-feedback">Please
-                provide a Email.</div>
-              <div *ngIf="emailField.touched && emailField.hasError('email')" class="d-block invalid-feedback">Email
-                address is
-                not valid</div>
+                class="form-control" id="id_email" placeholder="Correo Electronico">
+              <div *ngIf="emailField.touched && emailField.hasError('required')" class="d-block invalid-feedback">Por favor ingrese un correo electronico.</div>
+              <div *ngIf="emailField.touched && emailField.hasError('email')" class="d-block invalid-feedback">Correo electronico no valido</div>
             </div>
             <div class="mb-3">
-              <label for="id_Password" class="form-label">Password</label>
               <input formControlName="password" [class.is-invalid]="passwordField.touched && passwordField.invalid"
-                type="password" class="form-control" id="id_Password">
-              <div *ngIf="passwordField.touched && passwordField.hasError('required')" class="d-block invalid-feedback">
-                Please
-                provide a Password.</div>
+                type="password" class="form-control" id="id_Password" placeholder="Contraseña" #password>
+              <div *ngIf="passwordField.touched && passwordField.hasError('required')" class="d-block invalid-feedback">Por favor ingrese una contraseña</div>
             </div>
-            <button [disabled]="loginForm.invalid" type="submit" class="btn btn-lg btn-bd-primary w-100">Iniciar Sesion</button>
+            <div class="mb-3 d-none" #divVerifyPassword>
+              <input type="password" class="form-control" #inputVerifyPassword placeholder="Repetir contraseña">
+              <div *ngIf="password.value !== inputVerifyPassword.value" class="d-block invalid-feedback">Las contraseñas son diferentes</div>
+            </div>
+            <div *ngIf="ifRegister; else loginActions">
+              <button [disabled]="loginForm.invalid && password.value !== inputVerifyPassword.value" type="submit" class="btn btn-lg btn-bd-primary w-100">Crear una cuenta</button>
+              <p class="my-3">¿Ya tienes cuenta? <a class="btn-lnk" (click)="formLogin()">Iniciar Sesion</a></p>
+            </div>
+            <ng-template #loginActions>
+              <button [disabled]="loginForm.invalid" type="submit" class="btn btn-lg btn-bd-primary w-100">Iniciar Sesion</button>
+              <p class="my-3">¿Aun no te registraste? <a class="btn-lnk" (click)="formRegister()">Registrate ahora</a></p>
+            </ng-template>
           </form>
         </div>
       </div>

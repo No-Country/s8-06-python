@@ -34,3 +34,7 @@ body { margin: 0; font-family: Poppins, sans-serif; font-size: 1.25rem;}
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, "Helvetica Neue", "Roboto" sans-serif; }
+
+input {
+  height: 54px;
+}

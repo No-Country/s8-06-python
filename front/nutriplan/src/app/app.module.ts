@@ -13,13 +13,15 @@ import { typContacts } from '@ng-icons/typicons'
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { Error404Component } from './error404/error404.component';
+import { RecetasComponent } from './recetas/recetas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    Error404Component
+    Error404Component,
+    RecetasComponent
   ],
   imports: [
     BrowserModule,

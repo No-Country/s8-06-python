@@ -31,5 +31,5 @@ $nutriplan-theme: mat.define-light-theme((
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($nutriplan-theme);
-
+@import url('https://fonts.cdnfonts.com/css/roboto');
 
