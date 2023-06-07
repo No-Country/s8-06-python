@@ -9,6 +9,7 @@ class UserAdmin(ModelAdmin):
 
 
 admin.site.register(User,UserAdmin)
+admin.site.register(Profesional)
 
 admin.site.unregister(Group)
 
