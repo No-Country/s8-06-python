@@ -11,6 +11,7 @@ from rest_framework.authtoken.models import Token
 
 # Create your views here.
 class LoginView(generics.GenericAPIView):
+    serializer_class = UserSerializer
     def get(self, request):
         data_response = {"msg": "Método GET no permitido"}
         return Response(data_response, status.HTTP_405_METHOD_NOT_ALLOWED)
