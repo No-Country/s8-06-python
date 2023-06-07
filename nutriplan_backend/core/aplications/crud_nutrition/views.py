@@ -71,7 +71,7 @@ def post_edit(request, pk):
             form.save()
             return redirect('list_post')
     else:
-        form = PublicacionRecetaForm(instance=publication)
+        form = PublicationRecipeForm(instance=publication)
     return render(request, 'edit_post.html', {'form': form, 'publication': publication})
 
 def post_delete(request, pk):
