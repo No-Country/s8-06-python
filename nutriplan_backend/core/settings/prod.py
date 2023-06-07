@@ -1,16 +1,28 @@
 from .base import *
 
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@!8o8aasrme5(kgsn^unc===mz7=cbs5a4@211xr5t)0(-x_)i'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('POSTGRESQL_NAME'),
+        'USER': env('POSTGRESQL_USER'),
+        'PASSWORD': env('POSTGRESQL_PASS'),
+        'HOST': env('POSTGRESQL_HOST'),
+        'PORT': env('POSTGRESQL_PORT'),
     }
 }
