@@ -5,7 +5,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from .serializers import RoomSerializer, MessageSerializer
 from rest_framework import status
-from aplications.authentication.models import User, Profesional
+from aplications.authentication.models import User, Professional
 
 # Create your views here
 
@@ -16,17 +16,17 @@ class NewRoom(CreateAPIView):
         #Identificamos al usuario
         usuario= self.request.query_params.get('usuario')
         user = User.objects.get(username = usuario) 
-        #Identificamos al profesional
-        profesional = self.request.query_params.get('profesional')
-        user_prof = User.objects.get(username=profesional)
-        prof = Profesional.objects.get(usuario=user_prof)
+        #Identificamos al Professional
+        Professional = self.request.query_params.get('Professional')
+        user_prof = User.objects.get(username=Professional)
+        prof = Professional.objects.get(usuario=user_prof)
 
         if Room.objects.filter(user=user,professional=prof).exists():
             #Si la sala existe lo redirecciona a la sala, enviando el nombre del usuario
             return HttpResponse('Ya existe una conversacion con este usuario')
         else:
             #En otro caso se crea una nueva sala
-            new_room = Room.objects.create(name=usuario+'-'+profesional, user=user, professional=prof)
+            new_room = Room.objects.create(name=usuario+'-'+Professional, user=user, professional=prof)
             new_room.save()
             #Se redirecciona a la nueva sala con el usuario
             return HttpResponse('Sala creada exitosamente')
@@ -48,9 +48,9 @@ class ShowRoomsUser(APIView):
         user_name= self.request.query_params.get('user_name')
         type_user = self.request.query_params.get('type_user')
 
-        if type_user == 'PROFESIONAL':
+        if type_user == 'Professional':
             user = User.objects.get(username=user_name)
-            prof = Profesional.objects.get(usuario=user)
+            prof = Professional.objects.get(usuario=user)
             user_rooms= Room.objects.filter(professional=user, state=not(False)) #No mostrar aquellos suspendidos
         else:
             user = User.objects.get(username = user_name)
