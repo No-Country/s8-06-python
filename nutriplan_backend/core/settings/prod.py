@@ -4,6 +4,11 @@ import environ
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True)
+    POSTGRESQL_NAME = 'raliway'
+    POSTGRESQL_USER = 'postgres'
+    POSTGRESQL_PASS = 'B4Yf3hLvWYFZMdSSU8s2
+    POSTGRESQL_HOST = 'containers-us-west-22.railway.app'
+    POSTGRESQL_PORT = '5939'
 )
 # reading .env file
 environ.Env.read_env()
