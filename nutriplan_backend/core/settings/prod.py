@@ -6,9 +6,9 @@ env = environ.Env(
     DEBUG=(bool, True),
     POSTGRESQL_NAME = ('raliway'),
     POSTGRESQL_USER = ('postgres'),
-    POSTGRESQL_PASS = ('B4Yf3hLvWYFZMdSSU8s2'),
-    POSTGRESQL_HOST = ('containers-us-west-22.railway.app'),
-    POSTGRESQL_PORT = ('5939')
+    POSTGRESQL_PASS = ('fxHWHFBOh4rCS55FerQD'),
+    POSTGRESQL_HOST = ('containers-us-west-122.railway.app'),
+    POSTGRESQL_PORT = ('7760')
 )
 # reading .env file
 environ.Env.read_env()
